@@ -1,3 +1,1 @@
-# Git and Github Course
-
-Git test.
+# Weather bot for telegram

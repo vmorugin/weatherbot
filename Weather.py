@@ -5,12 +5,11 @@ from pyowm import OWM
 from pyowm.utils import config
 from pyowm.utils.config import get_default_config
 from pyowm.commons.exceptions import NotFoundError
-from tokens import token1,token2
 
 config_dict = get_default_config()
 config_dict['language'] = 'ru'  # your language here, eg. Portuguese
 
-owm = OWM(token1(), config_dict)
+owm = OWM('TOKEN', config_dict)
 mgr = owm.weather_manager()
 uncens = set()
 with open ("Uncens.txt") as unc:
@@ -18,19 +17,24 @@ with open ("Uncens.txt") as unc:
 		line = line.strip()
 		uncens.add(line)  # Подключили словарь нецензурных слов.
 
+# 1 0 7 6 2 3 4 5 было
+# 0 1 2 3 4 5 6 7 стало
+
 # Словарь с выражениями
-ph0 = ["На улице дождь, возьми зонтик.","Синоптики обещают дождь."]
+ph  = ["Возможен дожь, захвати зонтик. ","Возможно будет дождь. "]
+ph0 = ["Идёт дождь, не забудь зонтик. ","Синоптики обещают дождь. "]
 ph1 = ["На улице холода, лучше одеться теплее", "На улице очень холодно, лучше дома посидеть.", "На улице холодно, лучше надеть подштанники"]
-ph2 = ["На улице холодно, одевайся теплее.","На улице холодно, настало время достать зимний пуховик.","На улице холодно, не забудь шапку."]
-ph3 = ["На улице прохладно, надень легкую курточку или свитер.", "На улице прохладно, лучше надень ветровку.", "На улице прохладно, лучше надеть легкую куртку"]
-ph4 = ["На улице тепло, надевай что хочешь.","На улице тепло, самое время прогуляться.", "На улице отличная погода для прогулки."]
-ph5 = ["На улице очень жарко.","На улице жара, возьми с собой водички.","На улице жарко, лучше прикрыть голову."]
-ph6 = ["Погода около нуля, возможен гололёд, будь аккуратней", "На улице возможен гололёд"]
-ph7 = ["На улице холодно, лучше надеть перчатки.", "На улице холодно, одевайся теплее.", "На улице холодно, рекомендую надеть подштанники."]
+ph2 = ["На улице холодно, лучше надеть перчатки.", "На улице холодно, одевайся теплее.", "На улице холодно, рекомендую надеть подштанники."]
+ph3 = ["Погода около нуля, возможен гололёд, будь аккуратней", "На улице возможен гололёд"]
+ph4 = ["На улице холодно, одевайся теплее.","На улице холодно, настало время достать легкую куртку.","На улице холодно, не забудь шапку."]
+ph5 = ["Ещё пока холодно, лекую куртку лучше надеть", "На улице не очень тепло, но это временно."]
+ph6 = ["На улице прохладно, надень легкую куртку или свитер.", "На улице прохладно, лучше надень ветровку.", "На улице прохладно, лучше надеть легкую куртку"]
+ph7 = ["На улице тепло, надевай что хочешь.","На улице тепло, самое время прогуляться.", "На улице отличная погода для прогулки."]
+ph8 = ["На улице очень жарко.","На улице жара, возьми с собой водички.","На улице жарко, лучше прикрыть голову."]
 
 non = ["А я что-то не знаю такого города...", "Хм, или лыжи не едут или я не знаю такого города...", "Непонятна, попробуй другой город или проверь на ошибки..."]
 
-bot = telebot.TeleBot(token2(), parse_mode=None) 
+bot = telebot.TeleBot('TOKEN', parse_mode=None) 
 
 @bot.message_handler(content_types=['text'])
 def send_echo(message):
@@ -60,23 +64,32 @@ def send_echo(message):
 
 		answer += "\n_Температура_: _" + str(temp) + "_\t\t_Влажность_: _" + str(w.humidity) +"%_" + " \n\n"  # Выводим фразу в зависимости от температуры и погоды.
 		if "дождь" in w.detailed_status and int(*w.rain.values()) < 0.5:
-			answer += ph0[1] + " Осадки: " + str(*w.rain.values()) + " мм."
+			answer += random.choice(ph) + " Осадки: " + str(*w.rain.values()) + " мм. "
 		if "дождь" in w.detailed_status and int(*w.rain.values()) >= 0.5:
-			answer += ph0[0] + " Осадки: " + str(*w.rain.values()) + " мм."
+			answer += random.choice(ph0) + " Осадки: " + str(*w.rain.values()) + " мм. "
 		elif temp < -10:
 			answer += random.choice(ph1) 
+
 		elif temp <= -5:
-			answer += random.choice(ph7)
-		elif -1 <= temp <= 1:
-			answer += random.choice(ph6)
-		elif temp < 10:
 			answer += random.choice(ph2)
-		elif temp < 20:
+
+		elif -1 <= temp <= 1:
 			answer += random.choice(ph3)
-		elif temp < 28:
+
+		elif temp < 5:
 			answer += random.choice(ph4)
+
+		elif temp < 10:
+			answer += random.choice(ph5)
+
+		elif temp < 20:
+			answer += random.choice(ph6)
+
+		elif temp < 28:
+			answer += random.choice(ph7)
+
 		else:
-			answer += random.choice(ph5)	
+			answer += random.choice(ph8)	
 
 		markup = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)  # Кнопка, повторяющая прошлый город.
 		markup_btn1 = types.KeyboardButton(city)

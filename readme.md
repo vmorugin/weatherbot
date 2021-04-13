@@ -4,7 +4,7 @@
 
 <h2>2. <code>pip install pyTelegramBotAPI==0.3.0</code></h1>
 
-<p>First of all you need to get tokens for <a href="https://pypi.org/project/pyowm/" rel="nofollow">OWM</a> and <a href="https://core.telegram.org/bots/api" rel="nofollow">telegramm-bot</a>. You can read the detailed instructions in their documentation.</p>
+<p>First of all you need to get tokens for <a href="https://pypi.org/project/pyowm/" rel="nofollow">OWM</a> and <a href="https://pypi.org/project/pyTelegramBotAPI/0.3.0/" rel="nofollow">telegramm-bot</a>. You can read the detailed instructions in their documentation.</p>
 
 ```python
 # Insert your token from OWM into:

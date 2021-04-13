@@ -5,8 +5,14 @@
 <h2>2. <code>pip install pyTelegramBotAPI==0.3.0</code></h1>
 
 <p>First of all you need to get tokens for <a href="https://pypi.org/project/pyowm/" rel="nofollow">OWM</a> and <a href="https://core.telegram.org/bots/api" rel="nofollow">telegramm-bot</a>. You can read the detailed instructions in their documentation.</p>
-<p>Insert your token from OWM into "<code>owm = OWM('<b>TOKEN</b>', config_dict)</code>" 
-and token from telegram-bot into "<code>bot = telebot.TeleBot('<b>TOKEN</b>', parse_mode=None)</code>"</p>
+
+```python
+# Insert your token from OWM into:
+owm = OWM('TOKEN<', config_dict)
+
+# and token from telegram-bot into
+bot = telebot.TeleBot('TOKEN', parse_mode=None)
+```
 
 <p>I used <code><b>uncensored.txt</b></code> as censor, you could add unwanted expressions into it.</p>
 
@@ -14,5 +20,4 @@ and token from telegram-bot into "<code>bot = telebot.TeleBot('<b>TOKEN</b>', pa
 
 
 <p>Run script - <code><i>python Weather.py</i></code></p>
-
 

@@ -13,14 +13,11 @@ owm = OWM('TOKEN', config_dict)
 mgr = owm.weather_manager()
 uncens = set()
 
-""" with open ("Uncens.txt") as unc:  # You can remove this point if you want.
+with open ("Uncens.txt") as unc:  # You can remove this point if you want.
 	for line in unc:
 		line = line.strip()
 		uncens.add(line)  # Подключили словарь нецензурных слов.
-"""
 
-# 1 0 7 6 2 3 4 5 было
-# 0 1 2 3 4 5 6 7 стало
 
 # Словарь с выражениями
 ph  = ["Возможен дожь, захвати зонтик. ","Возможно будет дождь. "]

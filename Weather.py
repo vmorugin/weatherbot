@@ -13,10 +13,12 @@ config_dict['language'] = 'ru'  # your language here, eg. Portuguese
 owm = OWM(token1(), config_dict)
 mgr = owm.weather_manager()
 uncens = set()
-with open ("Uncens.txt") as unc:
+
+""" with open ("Uncens.txt") as unc:  # You can remove this point if you want.
 	for line in unc:
 		line = line.strip()
 		uncens.add(line)  # Подключили словарь нецензурных слов.
+"""
 
 # Словарь с выражениями
 ph0 = ["На улице дождь, возьми зонтик.","Синоптики обещают дождь."]

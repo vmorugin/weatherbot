@@ -1,6 +1,7 @@
 import os
 import pathlib
 from pyowm.utils import config
+import csv
 
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
 
@@ -73,7 +74,7 @@ UNCENSORED_PATH = BASE_DIR / 'uncensored.txt'
 
 # Подключили словарь нецензурных слов.
 if UNCENSORED_PATH.exists():
-	with open(UNCENSORED_PATH) as unc:  # You can remove this point if you want.
+	with open(UNCENSORED_PATH, 'rb') as unc:  # You can remove this point if you want.
 		for line in unc:
-			line = line.strip()
+			line = line.strip().decode('utf-8-sig')
 			UNCENSORED.add(line)

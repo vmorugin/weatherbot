@@ -78,7 +78,7 @@ def send_echo(message):
 		bot.send_message(message.chat.id, answer, reply_markup=markup, parse_mode="Markdown")
 
 	except NotFoundError:
-		if message.text.lower() in UNCENSORED:  # Фильтр нецензурных выражений
+		if any(map(lambda x: x in UNCENSORED, message.text.lower().split())):  # Фильтр нецензурных выражений
 			bot.send_message(message.chat.id, 'Сам ' + message.text)
 		else:  # Если город не удалось узнать
 			bot.send_message(message.chat.id, random.choice(ANSWERS.get('city_not_found')))

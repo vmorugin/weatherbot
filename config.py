@@ -1,7 +1,6 @@
 import os
 import pathlib
 from pyowm.utils import config
-import csv
 
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
 

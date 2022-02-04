@@ -71,9 +71,8 @@ UNCENSORED = set()
 
 UNCENSORED_PATH = BASE_DIR / 'uncensored.txt'
 
-# Подключили словарь нецензурных слов.
 if UNCENSORED_PATH.exists():
-	with open(UNCENSORED_PATH, 'rb') as unc:  # You can remove this point if you want.
+	with open(UNCENSORED_PATH, 'rb') as unc:
 		for line in unc:
 			line = line.strip().decode('utf-8-sig')
 			UNCENSORED.add(line)

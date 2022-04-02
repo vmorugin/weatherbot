@@ -1,6 +1,6 @@
 # Weather bot for telegram
 
-<h2>1. <code>pip install requirements.txt</code></h1>
+<code>pip install requirements.txt</code>
 
 
 <p>First of all you need to get tokens for <a href="https://pypi.org/project/pyowm/" rel="nofollow">OWM</a> and <a href="https://pypi.org/project/pyTelegramBotAPI/" rel="nofollow">telegramm-bot</a>. You can read the detailed instructions in their documentation.</p>
